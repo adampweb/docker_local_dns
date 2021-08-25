@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  webmin:
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: webmin:latest
+    container_name: webmin
+    ports:
+      - '10000:10000'
+    networks:
+      devnet:
+        ipv4_address: 172.18.0.3
+    restart: always
+
+networks:
+  devnet:
+    external: true
