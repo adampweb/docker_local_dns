@@ -1,4 +1,4 @@
-FROM localhost:5000/debian-buster-slim
+FROM debian:buster-slim
 
 
 RUN set -x \
