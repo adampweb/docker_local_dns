@@ -1,6 +1,5 @@
 FROM debian:buster-slim AS debian-base
 
-
 RUN set -x \
     && apt-get update \
     && apt-get install --no-install-recommends --no-install-suggests -y man nano procps ca-certificates wget gnupg gnupg2 iputils-ping net-tools supervisor
@@ -24,7 +23,6 @@ FROM webmin-base AS webmin-ssl
 
 # Configure OpenSSL...
 ADD ssl/create-ssl.sh /
-RUN chmod +x /create-ssl.sh
 
 ADD ssl/root-openssl.cnf /root/ca/openssl.cnf
 
@@ -33,3 +31,6 @@ ADD ssl/intermediate-openssl.cnf /root/ca/intermediate/openssl.cnf
 ADD ssl/site-openssl.cnf /root/ca/intermediate/site-openssl.cnf
 
 ADD ssl/site-openssl-original.cnf /root/ca/intermediate/site-openssl-original.cnf
+
+RUN chmod +x /create-ssl.sh \
+    && /create-ssl.sh
