@@ -8,6 +8,8 @@ function open_directory() {
 
 DOMAIN="dev.home"
 SITENAME="Dev Home"
+SSL_PASSWORD="fec3Qt5"
+SSL_ORGANIZATION_NAME="Dev Home"
 
 function create_ssl_directories() {
   CA_TYPE=$1
@@ -159,7 +161,7 @@ function create_client() {
   openssl req -text -noout -verify -in intermediate/csr/"${DOMAIN}".csr.pem
   # *****************************************************************************
 
-  echo -e "\e[93mCreate a certificate\e[39m"
+  echo -e "\e[93mCreate a certificate\e[0;39m"
 
   open_directory "/root/ca"
 
@@ -191,7 +193,7 @@ function create_client() {
   # *****************************************************************************
 
   echo -e "\e[93mCreate directory for the client certificates and keys...\e[39m"
-  mkdir /openssl-certs/"${DOMAIN}"
+  mkdir -p /openssl-certs/"${DOMAIN}"
 
   chmod 777 /openssl-certs/"${DOMAIN}"
 
