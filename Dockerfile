@@ -2,7 +2,10 @@ FROM debian:buster-slim AS debian-base
 
 RUN set -x \
     && apt-get update \
-    && apt-get install --no-install-recommends --no-install-suggests -y man nano procps ca-certificates wget gnupg gnupg2 iputils-ping net-tools supervisor
+    && apt-get install --no-install-recommends --no-install-suggests -y man nano procps ca-certificates wget gnupg gnupg2 iputils-ping net-tools supervisor \
+    && apt-get clean autoclean \
+    && apt-get autoremove --yes \
+    && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 FROM debian-base AS webmin-base
 
